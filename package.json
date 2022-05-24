@@ -9,7 +9,6 @@
     "dist"
   ],
   "devDependencies": {
-    "@plasmo/config": "workspace:*",
-    "typescript": "4.6.4"
+    "@plasmo/config": "workspace:*"
   }
 }
