@@ -4,6 +4,11 @@ export const cLog = (prefix = "", ...args: any[]) =>
   console.log(prefix.padEnd(9), "|", ...args)
 
 /**
+ * Appendix logging
+ */
+export const aLog = (...args: any[]) => cLog("", ...args)
+
+/**
  * Success logging
  */
 export const sLog = (...args: any[]) => cLog(`🟢 DONE`, ...args)
