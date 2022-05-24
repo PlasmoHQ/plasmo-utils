@@ -1,3 +1,6 @@
+export * from "./argv"
 export * from "./debounce"
+export * from "./flags"
+export * from "./logging"
 export * from "./platform"
 export * from "./transformer"
