@@ -7,3 +7,13 @@ export function transformRouteToEndpoint<T extends Record<string, string>>(
     return endpointOutput
   }, {}) as T
 }
+
+export function appendUri<T extends Record<string, string>>(
+  routeMap: T,
+  uri: string
+) {
+  return Object.entries(routeMap).reduce((endpointOutput, [key, route]) => {
+    endpointOutput[key] = `${route}/${uri}`
+    return endpointOutput
+  }, {}) as T
+}
