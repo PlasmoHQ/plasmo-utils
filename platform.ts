@@ -1,4 +1,4 @@
-import { assertUnreachable } from "./ts"
+import { assertUnreachable } from "./assert"
 
 /**
  * Forked from https://github.com/microsoft/vscode/blob/b9c773e03e2e3773072ef3f0929bb53351d15a41/src/vs/base/common/platform.ts
