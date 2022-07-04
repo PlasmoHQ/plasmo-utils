@@ -1,4 +1,4 @@
-import { argv } from "process"
-
 export const getNonFlagArgvs = (cmd: string) =>
-  argv.filter((arg) => !arg.startsWith("--")).slice(argv.indexOf(cmd) + 1)
+  process.argv
+    .filter((arg) => !arg.startsWith("--"))
+    .slice(process.argv.indexOf(cmd) + 1)
