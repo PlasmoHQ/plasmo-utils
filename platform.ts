@@ -117,16 +117,21 @@ export const enum Platform {
   Linux,
   Windows
 }
-export function PlatformToString(platform: Platform) {
+
+export const osPlatformStringMap = {
+  [Platform.Mac]: "Mac",
+  [Platform.Linux]: "Linux",
+  [Platform.Windows]: "Windows"
+} as const
+
+export function platformToString(platform: Platform) {
   switch (platform) {
     case Platform.Web:
       return "Web"
     case Platform.Mac:
-      return "Mac"
     case Platform.Linux:
-      return "Linux"
     case Platform.Windows:
-      return "Windows"
+      return osPlatformStringMap[platform]
     default:
       assertUnreachable(platform)
   }
@@ -141,7 +146,11 @@ if (_isMacintosh) {
   _platform = Platform.Linux
 }
 
-export const platformString = PlatformToString(_platform)
+export const osPlatforms = Object.values(osPlatformStringMap)
+
+export type OsPlatform = typeof osPlatforms[number]
+
+export const platformString = platformToString(_platform)
 
 export const isWindows = _isWindows
 export const isMacintosh = _isMacintosh
