@@ -1,8 +1,11 @@
-const flagSet = new Set(process.argv)
+const argv =
+  typeof globalThis.process !== "undefined" ? globalThis.process.argv : []
+
+const flagSet = new Set(argv)
 
 export const hasFlag = (flag: string) => flagSet.has(flag)
 
-const flagMap: Record<string, string> = process.argv
+const flagMap: Record<string, string> = argv
   .filter((arg) => arg.startsWith("--") && arg.includes("="))
   .map((arg) => arg.split("="))
   .reduce((map, [key, value]) => {
