@@ -1,6 +1,9 @@
 const argv =
   typeof globalThis.process !== "undefined" ? globalThis.process.argv : []
 
+const env =
+  typeof globalThis.process !== "undefined" ? globalThis.process.env : {}
+
 const flagSet = new Set(argv)
 
 export const hasFlag = (flag: string) => flagSet.has(flag)
@@ -18,7 +21,7 @@ export const getFlag = (flag: string) => flagMap[flag]
 // print result only
 export const dryRun = hasFlag("--dry-run")
 
-export const verbose = hasFlag("--verbose")
+export const verbose = hasFlag("--verbose") || env["VERBOSE"] === "true"
 
 export const flagsHelp = `
     Options:
