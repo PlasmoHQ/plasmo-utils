@@ -35,7 +35,7 @@ let verboseStep = 0
  * Verbose logging
  */
 export const vLog = (...args: any[]) =>
-  verbose && cLog(`🟡 STEP ${verboseStep++}`, ...args)
+  verbose && cLog(`🟡 ${verboseStep++}`, ...args)
 
 /**
  * Verbose table

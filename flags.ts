@@ -1,8 +1,14 @@
-const flagSet = new Set(process.argv)
+const argv =
+  typeof globalThis.process !== "undefined" ? globalThis.process.argv : []
+
+const env =
+  typeof globalThis.process !== "undefined" ? globalThis.process.env : {}
+
+const flagSet = new Set(argv)
 
 export const hasFlag = (flag: string) => flagSet.has(flag)
 
-const flagMap: Record<string, string> = process.argv
+const flagMap: Record<string, string> = argv
   .filter((arg) => arg.startsWith("--") && arg.includes("="))
   .map((arg) => arg.split("="))
   .reduce((map, [key, value]) => {
@@ -15,7 +21,7 @@ export const getFlag = (flag: string) => flagMap[flag]
 // print result only
 export const dryRun = hasFlag("--dry-run")
 
-export const verbose = hasFlag("--verbose")
+export const verbose = hasFlag("--verbose") || env["VERBOSE"] === "true"
 
 export const flagsHelp = `
     Options:
