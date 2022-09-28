@@ -8,6 +8,8 @@ import * as Events from "./events"
 const getGlobalWebSocket = () => {
   if (typeof globalThis.WebSocket !== "undefined") {
     return globalThis.WebSocket
+  } else {
+    return null
   }
 }
 
