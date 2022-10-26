@@ -23,8 +23,11 @@ export const dryRun = hasFlag("--dry-run")
 
 export const verbose = hasFlag("--verbose") || env["VERBOSE"] === "true"
 
+export const tag = getFlag("--tag")
+
 export const flagsHelp = `
     Options:
       --dry-run - run without making any changes
       --verbose - print run log
+      --tag     - allows to use tagged env, assets
 `
