@@ -1,8 +1,5 @@
-const argv =
-  typeof globalThis.process !== "undefined" ? globalThis.process.argv : []
-
-const env =
-  typeof globalThis.process !== "undefined" ? globalThis.process.env : {}
+import { argv } from "./argv"
+import { env } from "./env"
 
 const flagSet = new Set(argv)
 

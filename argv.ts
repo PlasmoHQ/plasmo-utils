@@ -1,4 +1,5 @@
-export const getNonFlagArgvs = (cmd = process.argv[2]) =>
-  process.argv
-    .filter((arg) => !arg.startsWith("--"))
-    .slice(process.argv.indexOf(cmd) + 1)
+export const argv =
+  typeof globalThis.process !== "undefined" ? globalThis.process.argv : []
+
+export const getNonFlagArgvs = (cmd = argv[2]) =>
+  argv.filter((arg) => !arg.startsWith("--")).slice(argv.indexOf(cmd) + 1)
