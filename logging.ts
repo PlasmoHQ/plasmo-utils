@@ -1,4 +1,4 @@
-import { verbose } from "./flags"
+import { isVerbose } from "./flags"
 
 export const cLog = (prefix = "", ...args: any[]) =>
   console.log(prefix.padEnd(9), "|", ...args)
@@ -35,10 +35,10 @@ let verboseStep = 0
  * Verbose logging
  */
 export const vLog = (...args: any[]) =>
-  verbose && cLog(`🟡 ${verboseStep++}`, ...args)
+  isVerbose() && cLog(`🟡 ${verboseStep++}`, ...args)
 
 /**
  * Verbose table
  */
 export const vTable = (tableData: any, props?: string[]) =>
-  verbose && console.table(tableData, props)
+  isVerbose() && console.table(tableData, props)

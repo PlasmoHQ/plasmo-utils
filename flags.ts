@@ -1,5 +1,5 @@
 import { argv } from "./argv"
-import { env } from "./env"
+import { getEnv } from "./env"
 
 const flagSet = new Set(argv)
 
@@ -18,7 +18,10 @@ export const getFlag = (flag: string) => flagMap[flag]
 // print result only
 export const dryRun = hasFlag("--dry-run")
 
-export const verbose = hasFlag("--verbose") || env["VERBOSE"] === "true"
+export const isVerbose = () =>
+  hasFlag("--verbose") || getEnv()["VERBOSE"] === "true"
+
+export const verbose = isVerbose()
 
 export const flagsHelp = `
     Options:
