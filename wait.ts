@@ -14,6 +14,6 @@ export async function exitCountDown(duration: number) {
     )
     await wait(1000)
   }
-  stdout.clearLine(0)
+  stdout?.clearLine(0)
   cLog("🔴 EXIT", `👋 Good bye and have a great day!`)
 }
