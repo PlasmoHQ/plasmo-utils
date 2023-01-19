@@ -1,4 +1,4 @@
-import { constants, existsSync } from "fs"
+import { constants } from "fs"
 import { access, mkdir, readdir } from "fs/promises"
 
 import { vLog } from "./logging"
@@ -66,7 +66,7 @@ export async function isFolderEmpty(root: string) {
 }
 
 export async function ensureWritableAndEmpty(dir: string) {
-  if (!existsSync(dir)) {
+  if (!(await isWriteable(dir))) {
     vLog("Directory does not exist, creating...")
     await mkdir(dir)
   } else {
