@@ -16,7 +16,7 @@ export async function isWriteable(directory: string) {
   return canAccessWithProperty(directory, constants.W_OK)
 }
 
-export async function fileExists(path: string) {
+export async function isFileOk(path: string) {
   return canAccessWithProperty(path, constants.F_OK)
 }
 
