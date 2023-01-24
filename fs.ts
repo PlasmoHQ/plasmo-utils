@@ -1,23 +1,51 @@
 import { constants } from "fs"
-import { access, mkdir, readdir } from "fs/promises"
+import { access, mkdir, readdir, stat } from "fs/promises"
 
 import { vLog } from "./logging"
 
-async function canAccessWithProperty(path: string, property: number) {
+async function canAccessWithMode(path: string, mode: number) {
   try {
-    await access(path, property)
+    await access(path, mode)
     return true
   } catch (err) {
+    vLog(err)
     return false
   }
 }
 
-export async function isWriteable(directory: string) {
-  return canAccessWithProperty(directory, constants.W_OK)
+export async function isWriteable(path: string) {
+  return canAccessWithMode(path, constants.W_OK)
 }
 
-export async function isFileOk(path: string) {
-  return canAccessWithProperty(path, constants.F_OK)
+export async function isReadable(path: string) {
+  return canAccessWithMode(path, constants.R_OK)
+}
+
+/**
+ * @returns True if readable, false otherwise
+ */
+export async function isAccessible(path: string) {
+  return canAccessWithMode(path, constants.F_OK)
+}
+
+export async function isDirectory(path: string) {
+  try {
+    const pathStat = await stat(path)
+    return pathStat.isDirectory()
+  } catch (err) {
+    vLog(err)
+    return false
+  }
+}
+
+export async function isFile(path: string) {
+  try {
+    const pathStat = await stat(path)
+    return pathStat.isFile()
+  } catch (err) {
+    vLog(err)
+    return false
+  }
 }
 
 const validFileSet = new Set([
@@ -70,12 +98,12 @@ export async function ensureWritableAndEmpty(dir: string) {
     vLog("Directory does not exist, creating...")
     await mkdir(dir)
   } else {
-    vLog("Directory exists, checking if it is empty")
+    vLog("Directory exists, checking if it is empty...")
     if (!(await isFolderEmpty(dir))) {
       throw new Error(`Directory ${dir} is not empty.`)
     }
 
-    vLog("... checking if it is writable")
+    vLog("Checking if directory is writable...")
     if (!(await isWriteable(dir))) {
       throw new Error(`Directory ${dir} is not accesible.`)
     }
