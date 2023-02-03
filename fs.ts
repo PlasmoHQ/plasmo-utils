@@ -7,8 +7,7 @@ async function canAccessWithMode(path: string, mode: number) {
   try {
     await access(path, mode)
     return true
-  } catch (err) {
-    vLog(err)
+  } catch {
     return false
   }
 }
@@ -32,8 +31,7 @@ export async function isDirectory(path: string) {
   try {
     const pathStat = await stat(path)
     return pathStat.isDirectory()
-  } catch (err) {
-    vLog(err)
+  } catch {
     return false
   }
 }
@@ -42,8 +40,7 @@ export async function isFile(path: string) {
   try {
     const pathStat = await stat(path)
     return pathStat.isFile()
-  } catch (err) {
-    vLog(err)
+  } catch {
     return false
   }
 }
