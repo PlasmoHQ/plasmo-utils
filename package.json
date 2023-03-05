@@ -8,6 +8,9 @@
   "files": [
     "dist"
   ],
+  "dependencies": {
+    "email-addresses": "5.0.0"
+  },
   "devDependencies": {
     "@plasmo/config": "workspace:*"
   }
