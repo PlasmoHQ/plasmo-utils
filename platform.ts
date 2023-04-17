@@ -148,7 +148,7 @@ if (_isMacintosh) {
 
 export const osPlatforms = Object.values(osPlatformStringMap)
 
-export type OsPlatform = typeof osPlatforms[number]
+export type OsPlatform = (typeof osPlatforms)[number]
 
 export const platformString = platformToString(_platform)
 
