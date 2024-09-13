@@ -1,5 +1,4 @@
-export const getEnv = () =>
-  typeof globalThis.process !== "undefined" ? globalThis.process.env : {}
+export const getEnv = () => globalThis.process?.env || {}
 
 const DEFAULT_ENV_REGEX = /\$([\w+]+)/gm
 
